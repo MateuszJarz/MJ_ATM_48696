@@ -21,14 +21,18 @@ namespace MJ_ATM_48696
 
 		/// ///////////////////////////////////////////
 		//declaration of an array for the sotrage of value // Nominały
-		float[] ValueOfMoney = { 200, 100, 50, 20, 10, 5, 2, 0.5F, 0.2F, 0, 1F };
+		float[] ValueOfMoney = { 200, 100, 50, 20, 10, 5, 2, 0.5F, 0.2F, 0.1F };
+		float[] ValueOfMoneyUSD = { 100, 50, 20, 10, 5, 2, 1, 0.5F, 0.25F, 0.10F, 0.05F, 0.01F };
+		float[] ValueOfMoneyEURO = { 200, 100, 50, 20, 10, 5, 2, 1, 0.50F, 0.20F, 0.10F, 0.05F, 0.02F, 0.01F };
+		float[] ValueOfMoneyGBP = { 50, 20, 10, 5, 2, 1, 0.5F, 0.2F, 0.1F, 0.05F, 0.02F, 0.01F };
+
 
 		/*defiinicja nowego typu danych (rekord danych) na potrzeby przechowania 
 		  par liczb w tablicy ContainerOfDenominations */
 
-	
 
-		
+
+
 
 		/// ///////////////////////////////////////////
 
@@ -53,13 +57,40 @@ namespace MJ_ATM_48696
 			this.Height = (int)(Screen.PrimaryScreen.Bounds.Height * 0.60F);
 			this.StartPosition = FormStartPosition.Manual;
 
-			mj_cb_value.SelectedIndex = 0;
-
 			
 
-			/*new copy of an array ContainerOfDenomination with the same 
-			 * cardinality like an array ValueOfMoney */
-			ContainerOfDenominations = new Denominations[ValueOfMoney.Length];
+
+
+			
+			// warunek dla wyboru walut 
+			if (mj_cb_value.SelectedIndex.Equals(0))
+			{
+				ContainerOfDenominations = new Denominations[ValueOfMoney.Length];
+			}
+			else
+			{
+				if (mj_cb_value.SelectedIndex.Equals(1))
+				{
+					ContainerOfDenominations = new Denominations[ValueOfMoneyUSD.Length];
+				}
+				else
+				{
+					if (mj_cb_value.SelectedIndex.Equals(2))
+					{
+						ContainerOfDenominations = new Denominations[ValueOfMoneyEURO.Length];
+					}
+					else
+					{
+						ContainerOfDenominations = new Denominations[ValueOfMoneyGBP.Length];
+					}//eslse3
+
+
+				}//else2
+					
+
+			}//else1
+			
+			
 
 
 			
@@ -109,7 +140,37 @@ namespace MJ_ATM_48696
 			{
 
 				ContainerOfDenominations[i].Cardinality = CardinalityOfDenominations;
-				ContainerOfDenominations[i].Value = ValueOfMoney[i];
+				
+
+				if (mj_cb_value.SelectedIndex.Equals(0))
+				{
+					ContainerOfDenominations[i].Value = ValueOfMoney[i];
+				}
+				else
+				{
+					if (mj_cb_value.SelectedIndex.Equals(1))
+					{
+						
+						ContainerOfDenominations[i].Value = ValueOfMoneyUSD[i];
+					}
+					else
+					{
+						if (mj_cb_value.SelectedIndex.Equals(2))
+						{
+							
+							ContainerOfDenominations[i].Value = ValueOfMoneyEURO[i];
+						}
+						else
+						{
+							
+							ContainerOfDenominations[i].Value = ValueOfMoneyGBP[i];
+						}//eslse3
+
+
+					}//else2
+
+
+				}//else1
 
 			}
 			//activity controls 
@@ -308,12 +369,46 @@ namespace MJ_ATM_48696
 			// sprawdzanie, czy bankomat ma kasę dla zrealizowania wymaganej wypłaty 
 
 			
-			for(int i = 0; i < ContainerOfDenominations.Length; i++)
+			
+
+			for (ushort i = 0; i < ContainerOfDenominations.Length; i++)
 			{
+
 				ContainerOfDenominations[i].Cardinality = (ushort)RnD.Next(DolnaG, GornaG);
-				ContainerOfDenominations[i].Value = ValueOfMoney[i];
+
+
+				if (mj_cb_value.SelectedIndex.Equals(0))
+				{
+					ContainerOfDenominations[i].Value = ValueOfMoney[i];
+				}
+				else
+				{
+					if (mj_cb_value.SelectedIndex.Equals(1))
+					{
+
+						ContainerOfDenominations[i].Value = ValueOfMoneyUSD[i];
+					}
+					else
+					{
+						if (mj_cb_value.SelectedIndex.Equals(2))
+						{
+
+							ContainerOfDenominations[i].Value = ValueOfMoneyEURO[i];
+						}
+						else
+						{
+
+							ContainerOfDenominations[i].Value = ValueOfMoneyGBP[i];
+						}//eslse3
+
+
+					}//else2
+
+
+				}//else1
+
 			}
-				
+
 
 			// wyzerowanie dgv
 

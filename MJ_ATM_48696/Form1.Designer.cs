@@ -70,8 +70,9 @@
 			this.mj_cb_value.FormattingEnabled = true;
 			this.mj_cb_value.Items.AddRange(new object[] {
             "PLN",
-            "US",
-            "EUR"});
+            "USD",
+            "EURO",
+            "GBP"});
 			this.mj_cb_value.Location = new System.Drawing.Point(15, 39);
 			this.mj_cb_value.Name = "mj_cb_value";
 			this.mj_cb_value.Size = new System.Drawing.Size(121, 21);
